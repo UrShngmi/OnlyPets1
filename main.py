@@ -22,7 +22,10 @@ class App(ctk.CTk):
         self.db_manager.init_db()
 
         self.title("OnlyPets")
-        self.geometry("1280x800")
+        
+        # Center and Maximize Window
+        self.after(0, lambda:self.state('zoomed'))
+
         self.minsize(960, 720)
 
         ctk.set_appearance_mode("Dark")
@@ -77,4 +80,5 @@ class App(ctk.CTk):
 if __name__ == "__main__":
     app = App()
     app.mainloop()
+
 
