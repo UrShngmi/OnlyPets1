@@ -55,26 +55,23 @@ class DatabaseManager:
         """Populates the database with sample data if it's empty."""
         self.cursor.execute("SELECT COUNT(*) FROM pets")
         if self.cursor.fetchone()[0] == 0:
+            # Revised to use user-provided asset names
             sample_pets = [
                 ('Buddy', 'Golden Retriever', 2, 'A friendly and playful dog.', 'Loves fetch; Good with kids', 'assets/pets/dog1.jpg'),
-                ('Lucy', 'Siamese', 1, 'A curious and vocal cat.', 'Very agile; Likes high places', 'assets/pets/cat1.jpg'),
                 ('Max', 'German Shepherd', 3, 'Loyal and protective.', 'Highly intelligent; Needs exercise', 'assets/pets/dog2.jpg'),
-                ('Misty', 'Persian', 4, 'A calm and affectionate cat.', 'Long fur; Enjoys naps', 'assets/pets/cat2.jpg'),
-                ('Charlie', 'Beagle', 1, 'An energetic and happy dog.', 'Great sense of smell; Loves to explore', 'assets/pets/dog3.jpg'),
-                ('Chloe', 'British Shorthair', 2, 'A sweet and gentle cat.', 'Plush coat; Independent', 'assets/pets/cat3.jpg'),
-                ('Rocky', 'Boxer', 5, 'A powerful and energetic dog.', 'Playful; Good family dog', 'assets/pets/dog4.jpg'),
-                ('Nala', 'Maine Coon', 2, 'A large and friendly cat.', 'Known as "gentle giants"; Fluffy tail', 'assets/pets/cat4.jpg'),
+                ('Lucy', 'Siamese', 1, 'A curious and vocal cat.', 'Very agile; Likes high places', 'assets/pets/cat1.jpg'),
+                ('Misty', 'Persian', 4, 'A calm and affectionate cat.', 'Long fur; Enjoys naps', 'assets/pets/cat_placeholder.jpg'), # This will use a placeholder
             ]
             self.cursor.executemany('INSERT INTO pets (name, breed, age, description, quick_facts, image_path) VALUES (?, ?, ?, ?, ?, ?)', sample_pets)
 
         self.cursor.execute("SELECT COUNT(*) FROM services")
         if self.cursor.fetchone()[0] == 0:
+            # Revised to use user-provided asset names
             sample_services = [
                 ('Grooming', 'Full-service grooming including bath, haircut, and nail trim.', 50.00, 'assets/services/grooming.jpg'),
-                ('Veterinary Checkup', 'Complete health checkup by a certified veterinarian.', 75.00, 'assets/services/vet.jpg'),
+                ('Veterinary Checkup', 'Complete health checkup by a certified veterinarian.', 75.00, 'assets/services/checkup.jpg'),
                 ('Obedience Training', 'Basic obedience training classes for dogs.', 120.00, 'assets/services/training.jpg'),
-                ('Pet Sitting', 'Day and overnight pet sitting services.', 40.00, 'assets/services/sitting.jpg'),
-                ('Dental Cleaning', 'Professional dental cleaning for pets.', 90.00, 'assets/services/dental.jpg'),
+                ('Pet Sitting', 'Day and overnight pet sitting services.', 40.00, 'assets/services/sitting_placeholder.jpg'), # This will use a placeholder
             ]
             self.cursor.executemany('INSERT INTO services (name, description, price, image_path) VALUES (?, ?, ?, ?)', sample_services)
 
@@ -145,3 +142,4 @@ class WishlistManager:
     def get_wishlist(self):
         """Returns the current wishlist."""
         return self.wishlist
+
